@@ -1,0 +1,68 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.63.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 842745cb706f8f2126506f544492f7a80dbe29b3 COPYING
+SHA1 a1f4d4b9d3a26f6bc500fda170934fb34875b6ac Changes
+SHA1 f6e214f7b553953bfbc2ba4df250e664f8c6b926 MANIFEST
+SHA1 9f057ed3ba7d042426c4d899f7685b4ae05076b2 MANIFEST.SKIP
+SHA1 e4566a2e60b67824dd76a58412aab0fdfe43333f META.yml
+SHA1 78fd6557eadf898b75f459f26464b26436ea035f Makefile.PL
+SHA1 8f01bd238f1f5fe916c1030068b0b1100eac55a5 debian/changelog
+SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
+SHA1 a7fc733070ab6532850c0b5ba1ef490eab9498bb debian/control
+SHA1 9fb0eaa5987dbc1ffd0d958ce41710f19b5710c3 debian/copyright
+SHA1 d3bb91ea91c9e478ed037c0b7a873f7d9fd03f3b debian/rules
+SHA1 61652cd1568dcf2614df833eba241755eee34e89 debian/source/format
+SHA1 64da2e44f057b8c13748de559f28ff3e16f019ec debian/watch
+SHA1 a9ecf6afa9138ebf3d29c97fc4a5e5a342e3734c devel/Gtk2ExWindowManagerFrame.pm
+SHA1 1097eced2bb7d3a158fb23aaae8641f86fecd8b1 devel/iri.pl
+SHA1 7cd206806ae0793acea959accd6ed303596c810b devel/run.pl
+SHA1 2ee78cd4566ba9190e339ed83af3826451a7e9dd devel/screenshot-dialog.pl
+SHA1 5567dcb14176aed8f265887ba02388b8175aedd7 devel/screenshot.pl
+SHA1 716b94245bd19ffd1a5a7ce3a846f2bff9fdd8d5 devel/ui.pl
+SHA1 3f00375a75a28eb28c9216d722220e52aec8e58d inc/MyMakeMakerExtras.pm
+SHA1 a2fa0855f3a1ea6140956ec567bea259e0099893 inc/MyMakeMakerGettext.pm
+SHA1 cbaf64723229e1bc55d56b907f8d47d4d389dbe3 lib/Gtk2/Ex/History.pm
+SHA1 1fdcb19b599a26d7be0dd6b6612dc81650a30527 lib/Gtk2/Ex/History/Action.pm
+SHA1 59a9fbab37ce2e84ab85297958a2a000ff714b6e lib/Gtk2/Ex/History/Button.pm
+SHA1 e099c5c19fc8252578325c5a859994711b0775b8 lib/Gtk2/Ex/History/Dialog.pm
+SHA1 68a8d780e57be475e9cdad0beb620d244e7ffe97 lib/Gtk2/Ex/History/ListStore.pm
+SHA1 ce993e50459ba9808017229d049b669789a0caf4 lib/Gtk2/Ex/History/Menu.pm
+SHA1 98ba6b2ec7a2c24ca141a2f8faaab1ebd9381208 lib/Gtk2/Ex/History/ModelSensitive.pm
+SHA1 c7e521990b088a1404f58feb0127419221480b05 po/Gtk2-Ex-History.pot
+SHA1 ceab03b1599a11baa24c259e5f74931ab99b9ef6 po/README
+SHA1 397c9a8468a3f3169758de40f1325cc675642553 po/header.pot
+SHA1 9127f78a0dfa04976acbb979dd7862ef59a74c58 t/0-META-read.t
+SHA1 37abd43b41068804ea4bb099fdd89af21be82926 t/0-Test-DistManifest.t
+SHA1 8f93fb4c8f0424a4442cc93c9a2e86342ef55281 t/0-Test-Pod.t
+SHA1 1de8f07883f6bf1a2ef79f2cb8adf1deb3f61cee t/0-Test-Synopsis.t
+SHA1 fb517c2fae5ddac559318bf6a224949115ea3129 t/0-Test-YAML-Meta.t
+SHA1 923ad62d5139e599575068a0a7294dbe4a04694e t/Button-weaken.t
+SHA1 8e68c6b2f2bb2e2af8bc128895dd7c76e78f2cef t/Button.t
+SHA1 add20dbeb6f40dca209c3e6a99016e28b3d10da3 t/Dialog-weaken.t
+SHA1 4be68422fe53318b268f51e7e6cfe891b7584440 t/Dialog.t
+SHA1 33a1836eee29c72ca4cb9a1d8b9d404087e85991 t/History-weaken.t
+SHA1 ce98e43c8f014b4538e4e9152e0798a2090146be t/History.t
+SHA1 9ce085501bd743c494992f0155c02091fb5522e9 t/Menu-weaken.t
+SHA1 898e513e70c0dc0abc5f8145124600a3c1964959 t/Menu.t
+SHA1 b98ec63aaa140101fe850d117c483d88b25a32a9 t/MyTestHelpers.pm
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iD8DBQFMZxjTLFMCIV9q3ToRAiT8AKCXpYlnaPUDEwnzr3u2T+Y8aBB5wwCeKHkn
+85CcbGhgTpuPe/K+hewns5E=
+=YU2U
+-----END PGP SIGNATURE-----
