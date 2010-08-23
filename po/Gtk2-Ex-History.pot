@@ -30,11 +30,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Gtk2/Ex/History/Action.pm:147
+#: lib/Gtk2/Ex/History/Action.pm:144
 msgid "Go back."
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Action.pm:148
+#: lib/Gtk2/Ex/History/Action.pm:145
 msgid "Go forward."
 msgstr ""
 

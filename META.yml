@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Gtk2-Ex-History
-version:            1
+version:            2
 abstract:           History of current, back and forward places for user navigation.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -20,6 +20,7 @@ requires:
     Gtk2::Ex::MenuView:   0
     Gtk2::Ex::TreeModelBits:  16
     Gtk2::Ex::Units:      13
+    Gtk2::Ex::WidgetEvents:  21
     Locale::Messages:     0
     Locale::TextDomain:   1.16
     perl:                 5.008

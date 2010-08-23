@@ -33,7 +33,7 @@ BEGIN {
                                             \&Locale::Messages::turn_utf_8_on);
 }
 
-our $VERSION = 1;
+our $VERSION = 2;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
@@ -96,12 +96,9 @@ sub _do_connect_proxy {
 
     # must have 'button-release-mask' or the menu doesn't pop down on button
     # release, for some reason
-    $button->add_events (['button-release-mask']);
-
-    # maybe ...
-    #     require Gtk2::Ex::WidgetEvents;
-    #     $toolitem->{(__PACKAGE__)}->{'events'}
-    #       = Gtk2::Ex::WidgetEvents->new ($button, ['button-release-mask']);
+    require Gtk2::Ex::WidgetEvents;
+    $toolitem->{(__PACKAGE__)}->{'wevents'}
+      = Gtk2::Ex::WidgetEvents->new ($button, ['button-release-mask']);
 
     require Glib::Ex::SignalIds;
     Scalar::Util::weaken (my $weak_self = $self);

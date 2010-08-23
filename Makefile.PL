@@ -48,8 +48,9 @@ MyMakeMakerExtras::WriteMakefile
 
                     # my Gtk2-Ex-WidgetBits
                     'Gtk2::Ex::TreeModelBits' => 16, # for extra remove args
-                    'Gtk2::Ex::Units'    => 13, # new in version 13
-                    'Test::Weaken::Gtk2' => 17, # new in version 17
+                    'Gtk2::Ex::Units'         => 13, # new in version 13
+                    'Gtk2::Ex::WidgetEvents'  => 21, # new in version 21
+                    'Test::Weaken::Gtk2'      => 17, # new in version 17
 
                     'Gtk2::Ex::Dashes::MenuItem' => 0,
                     'Gtk2::Ex::MenuView' => 0,

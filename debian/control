@@ -31,7 +31,7 @@ Bugs: mailto:user42@zip.com.au
 
 Package: libgtk2-ex-history-perl
 Architecture: all
-Depends: libglib-perl, libgtk2-perl (>= 1.220), libglib-ex-objectbits-perl (>= 9), libgtk2-ex-widgetbits-perl (>= 17), libgtk2-ex-dashes-perl, libgtk2-ex-menuview-perl, libintl-perl (>= 1.16), ${perl:Depends}, ${misc:Depends}
+Depends: libglib-perl, libgtk2-perl (>= 1.220), libglib-ex-objectbits-perl (>= 9), libgtk2-ex-widgetbits-perl (>= 21), libgtk2-ex-dashes-perl, libgtk2-ex-menuview-perl, libintl-perl (>= 1.16), ${perl:Depends}, ${misc:Depends}
 Description: History of current, back and forward places for user navigation.
  A History object holds places, Action, Button, Menu, Dialog user
  widgets elements move through it.

@@ -30,7 +30,7 @@ require Gtk2::Ex::History;
 
 
 #-----------------------------------------------------------------------------
-my $want_version = 1;
+my $want_version = 2;
 is ($Gtk2::Ex::History::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
 { ok (eval { Gtk2::Ex::History->VERSION($want_version); 1 },

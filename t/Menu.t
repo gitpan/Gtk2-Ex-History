@@ -36,7 +36,7 @@ Gtk2->init_check
 plan tests => 8;
 
 #-----------------------------------------------------------------------------
-my $want_version = 1;
+my $want_version = 2;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::Menu::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History::Menu->VERSION,  $want_version, 'VERSION class method');
