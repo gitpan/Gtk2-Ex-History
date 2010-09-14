@@ -33,7 +33,7 @@ BEGIN {
                                             \&Locale::Messages::turn_utf_8_on);
 }
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
@@ -159,13 +159,13 @@ sub _do_activate {
 1;
 __END__
 
-=for stopwords 
+=for stopwords tooltip popup UIManager enum Ryde hashref Gtk2-Ex-History
 
 =head1 NAME
 
 Gtk2::Ex::History::Action -- Gtk2::Action to go back or forward in a history
 
-=for test_synopsis my ($history, $actiongroup)
+=for test_synopsis my ($my_history, $actiongroup)
 
 =head1 SYNOPSIS
 
@@ -173,7 +173,7 @@ Gtk2::Ex::History::Action -- Gtk2::Action to go back or forward in a history
  my $action = Gtk2::Ex::History::Action->new
                  (name    => 'ForwardInHistory',
                   way     => 'forward',
-                  history => $history);
+                  history => $my_history);
  $actiongroup->add_action_with_accel ($action, '<Ctrl><Shift>F');
 
 =head1 OBJECT HIERARCHY
@@ -215,7 +215,7 @@ properties per C<< Glib::Object->new >>.
 The C<history> property is what to act on, and C<way> for back or forward.
 The usual action C<name> property should be set to identify it in a
 UIManager or similar.  The name can be anything desired.  Just "Back" and
-"Forward" are good, or add more to distinguish it from other actions.
+"Forward" are good, or something more to distinguish it from other actions.
 
     my $action = Gtk2::Ex::History::Action->new
                     (name    => 'ForwardHistory',
@@ -228,11 +228,11 @@ UIManager or similar.  The name can be anything desired.  Just "Back" and
 
 =over 4
 
-=item C<history> (C<Gtk2::Ex::History> object, default undef)
+=item C<history> (C<Gtk2::Ex::History> object, default C<undef>)
 
 The history object to act on.
 
-=item C<way> (C<Gtk2::Ex::History::Way> enum, default 'back')
+=item C<way> (enum C<Gtk2::Ex::History::Way>, default 'back')
 
 The direction to go, either "back" or "forward".
 

@@ -44,7 +44,7 @@ BEGIN {
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 use Glib::Object::Subclass
   'Gtk2::Dialog',
@@ -254,7 +254,7 @@ sub popup {
 1;
 __END__
 
-=for stopwords popup undef
+=for stopwords popup Ryde Gtk2-Ex-History
 
 =head1 NAME
 
@@ -320,7 +320,7 @@ is what to display.
 
 =over 4
 
-=item C<history> (C<Gtk2::Ex::History> object, default undef)
+=item C<history> (C<Gtk2::Ex::History> object, default C<undef>)
 
 The history object to display and act on.
 

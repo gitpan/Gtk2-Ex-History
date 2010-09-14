@@ -30,7 +30,7 @@ use Glib::Ex::FreezeNotify;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 
 # place-to-icon-pixbuf
@@ -272,7 +272,7 @@ sub _limit {
 1;
 __END__
 
-=for stopwords goto UIManager filename arrayref stringize filenames filesystem charset boolean
+=for stopwords goto UIManager filename arrayref stringize filenames filesystem charset boolean Ryde hashref Gtk2-Ex-History
 
 =head1 NAME
 

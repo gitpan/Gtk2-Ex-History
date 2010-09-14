@@ -1,4 +1,4 @@
-# Copyright 2007, 2008, 2009, 2010 Kevin Ryde
+# Copyright 2010 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License along
 # with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
-package Gtk2::Ex::History::Button;
+package Gtk2::Ex::History::MenuToolButton;
 use 5.008;
 use strict;
 use warnings;
@@ -28,12 +28,14 @@ use Gtk2::Ex::History::ModelSensitive;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
+
+
 our $VERSION = 3;
 
 use Glib::Object::Subclass
-  'Gtk2::Button',
+  'Gtk2::MenuToolButton',
   signals => { clicked => \&_do_clicked,
-               button_press_event  => \&_do_button_press_event },
+               show_menu => \&_do_show_menu },
   properties => [ Glib::ParamSpec->object
                   ('history',
                    'history',
@@ -52,7 +54,7 @@ use Glib::Object::Subclass
 
 sub INIT_INSTANCE {
   my ($self) = @_;
-  _update ($self);
+  $self->set_stock_id ('gtk-go-back');
 }
 
 sub SET_PROPERTY {
@@ -60,113 +62,122 @@ sub SET_PROPERTY {
   my $pname = $pspec->get_name;
   $self->{$pname} = $newval;  # per default GET_PROPERTY
 
-  #  if ($pname eq 'history' || $pname eq 'way') { ...
+  if ($pname eq 'history') {
+    unless ($self->get_menu) {
+      $self->set_menu (Gtk2::Menu->new); # dummy to make arrow sensitive
+    }
+  }
 
-  # should only need to update the icon when setting 'way', but as of gtk
-  # 2.18 the icon in INIT_INSTANCE doesn't take effect -- something about
-  # "constructor"
-  _update ($self);
-}
-
-sub _update {
-  my ($self) = @_;
-  my $way = $self->get('way');
-
-  $self->set_label ("gtk-go-$way");
-  $self->set_use_stock (1);
+  if ($pname eq 'way') {
+    $self->set_stock_id ("gtk-go-$newval");
+  }
 
   my $history = $self->{'history'};
+  my $way = $self->get('way');
+  if (my $menu = $self->get_menu) {
+    if ($menu->isa('Gtk2::Ex::History::Menu')) {
+      $menu->set (history => $history,
+                  way => $way);
+    }
+  }
   $self->{'sensitive'} = $history && Gtk2::Ex::History::ModelSensitive->new
     ($self, $history->model($way));
+}
+
+sub _do_show_menu {
+  my ($self) = @_;
+  ### _do_show_menu()
+  if (my $history = $self->{'history'}) {
+    my $menu;
+    unless (($menu = $self->get_menu)
+            && ($menu->isa('Gtk2::Ex::History::Menu'))) {
+      require Gtk2::Ex::History::Menu;
+      $self->set_menu (Gtk2::Ex::History::Menu->new (history => $history,
+                                                     way => $self->get('way')));
+    }
+  }
+  shift->signal_chain_from_overridden(@_);
 }
 
 # 'clicked' class closure
 sub _do_clicked {
   my ($self) = @_;
-  ### History-Button clicked: $self->get('way')
+  ### History-MenuToolButton clicked: $self->get('way')
   my $history = $self->{'history'} || return;
   my $way = $self->get('way');
   $history->$way;
   return shift->signal_chain_from_overridden(@_);
 }
 
-# 'button-press-event' class closure
-#
-# Might like this popup to work even when there's no items in the model and
-# the button is therefore insensitive, but the button-press-event doesn't
-# come through when insensitive.
-#
-sub _do_button_press_event {
-  my ($self, $event) = @_;
-  ### History-Button button-press-event: $event->button
-  if ($event->button == 3 && (my $history = $self->{'history'})) {
-    require Gtk2::Ex::History::Menu;
-    Gtk2::Ex::History::Menu->new_popup (history => $history,
-                                        way     => $self->get('way'),
-                                        event   => $event);
-  }
-  return shift->signal_chain_from_overridden(@_);
-}
-
 1;
 __END__
 
-=for stopwords enum Ryde Gtk2-Ex-History
+=for stopwords enum MenuToolButton popup Ryde Gtk2-Ex-History
 
 =head1 NAME
 
-Gtk2::Ex::History::Button -- button for history "back" or "forward"
+Gtk2::Ex::History::MenuToolButton -- toolbar button for history "back" or "forward"
 
-=for test_synopsis my ($my_history)
+=for test_synopsis my ($my_history, $toolbar)
 
 =head1 SYNOPSIS
 
- use Gtk2::Ex::History::Button;
- my $button = Gtk2::Ex::History::Button->new
-                (history => $my_history,
-                 way => 'forward');
+ use Gtk2::Ex::History::MenuToolButton;
+ my $item = Gtk2::Ex::History::MenuToolButton->new
+              (history => $my_history,
+               way => 'forward');
+ $toolbar->add ($item);
 
 =head1 OBJECT HIERARCHY
 
-C<Gtk2::Ex::History::Button> is a subclass of C<Gtk2::Button>.
+C<Gtk2::Ex::History::MenuToolButton> is a subclass of
+C<Gtk2::MenuToolButton>.
 
     Gtk2::Widget
       Gtk2::Container
         Gtk2::Bin
-          Gtk2::Button
-            Gtk2::Ex::History::Button
+          Gtk2::ToolItem
+            Gtk2::ToolButton
+              Gtk2::MenuToolButton
+                Gtk2::Ex::History::MenuToolButton
 
 =head1 DESCRIPTION
 
-A C<Gtk2::Ex::History::Button> invokes either C<back> or C<forward> on a
-C<Gtk2::Ex::History> object.
+This is a toolbar button which invokes either C<back> or C<forward> on a
+C<Gtk2::Ex::History> object.  The arrow part of the button presents a menu
+of the history in that direction.
 
-    +--------------+
-    | ==>  Forward |
-    +--------------+
+    +-------------+---+
+    |             |   |
+    | ==> Forward | V |
+    |             |   |
+    +-------------+---+
+                  +---------------+
+                  | Some Thing    |
+                  | Another Place |
+                  | Future Most   |
+                  +---------------+
 
-Mouse button-3 opens a C<Gtk2::Ex::History::Menu> to select an entry from a
-menu to jump to, to go more than one place back or forward.
-
-A button like this can be used anywhere desired.  If it's put in a
-C<Gtk2::ToolItem> it can be used in a C<Gtk2::Toolbar>, though if using
-C<Gtk2::UIManager> then see L<Gtk2::Ex::History::Action> instead.
+A plain C<Gtk2::Ex::History::Button> can be put in a C<Gtk2::ToolItem> and
+used in a toolbar for a similar result.  The difference is whether you
+prefer the menu popup with an arrow or with mouse button-3.  The arrow has
+the advantage of a visual indication that there's something available.
 
 =head1 FUNCTIONS
 
 =over 4
 
-=item C<< $button = Gtk2::Ex::History::Button->new (key => value, ...) >>
+=item C<< $item = Gtk2::Ex::History::MenuToolButton->new (key => value, ...) >>
 
 Create and return a new history button.  Optional key/value pairs can be
 given to set initial properties, as per C<< Glib::Object->new >>.
 
-The C<history> property should be set to say what to display, and C<way> for
-back or forward.
+The C<history> property should be set to say what to display and act on, and
+C<way> for back or forward.
 
-    my $button = Gtk2::Ex::History::Button->new
-                    (history => $history,
-                     way => 'forward');
+    my $item = Gtk2::Ex::History::MenuToolButton->new
+                  (history => $history,
+                   way => 'forward');
 
 =back
 
@@ -178,12 +189,12 @@ back or forward.
 
 The history object to act on.
 
-=item C<way> (enum C<Gtk2::Ex::History::Way>, default "back")
+=item C<way> (enum C<Gtk2::Ex::History::Way>, default 'back')
 
 The direction to go, either "back" or "forward".
 
-The "stock" icon is set from this, either C<gtk-go-back> or
-C<gtk-go-forward>.
+The C<stock-id> property (per C<Gtk2::ToolButton>) is set from this, either
+C<gtk-go-back> or C<gtk-go-forward>.
 
 =back
 
@@ -191,9 +202,9 @@ C<gtk-go-forward>.
 
 L<Gtk2::Ex::History>,
 L<Gtk2::Ex::History::Menu>,
-L<Gtk2::Ex::History::MenuToolButton>,
+L<Gtk2::Ex::History::Button>,
 L<Gtk2::Ex::History::Action>,
-L<Gtk2::Button>
+L<Gtk2::MenuToolButton>
 
 =head1 HOME PAGE
 

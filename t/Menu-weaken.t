@@ -36,7 +36,7 @@ require Gtk2::Ex::History::Menu;
 require Gtk2;
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
-plan tests => 1;
+plan tests => 2;
 
 require Test::Weaken::Gtk2;
 {
@@ -50,6 +50,22 @@ require Test::Weaken::Gtk2;
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection');
+  if ($leaks && defined &explain) {
+    diag "Test-Weaken ", explain $leaks;
+  }
+}
+
+{
+  my $leaks = Test::Weaken::leaks
+    ({ constructor => sub {
+         my $history = Gtk2::Ex::History->new;
+         my $menu = Gtk2::Ex::History::Menu->new_popup (history => $history);
+         return [ $menu, $history ];
+       },
+       destructor => \&Test::Weaken::Gtk2::destructor_destroy,
+       contents => \&Test::Weaken::Gtk2::contents_container,
+     });
+  is ($leaks, undef, 'Test::Weaken deep garbage collection - with popup');
   if ($leaks && defined &explain) {
     diag "Test-Weaken ", explain $leaks;
   }

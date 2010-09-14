@@ -33,10 +33,10 @@ Gtk2->disable_setlocale;  # leave LC_NUMERIC alone for version nums
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
 
-plan tests => 8;
+plan tests => 9;
 
 #-----------------------------------------------------------------------------
-my $want_version = 2;
+my $want_version = 3;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::Button::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History::Button->VERSION,  $want_version, 'VERSION class method');
@@ -58,7 +58,8 @@ is (Gtk2::Ex::History::Button->VERSION,  $want_version, 'VERSION class method');
   ok (! eval { $button->VERSION($want_version + 1000); 1 },
       "VERSION object check " . ($want_version + 1000));
 
-  $button->destroy;
+  Scalar::Util::weaken ($button);
+  is ($button, undef, 'gc when weakened');
 }
 
 exit 0;

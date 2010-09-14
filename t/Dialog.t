@@ -32,10 +32,10 @@ require Gtk2;
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
 
-plan tests => 10;
+plan tests => 13;
 
 #-----------------------------------------------------------------------------
-my $want_version = 2;
+my $want_version = 3;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::Dialog::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History::Dialog->VERSION,  $want_version, 'VERSION class method');
@@ -49,7 +49,7 @@ is (Gtk2::Ex::History::Dialog->VERSION,  $want_version, 'VERSION class method');
 # new()
 {
   my $dialog = Gtk2::Ex::History::Dialog->new;
-  isa_ok ($dialog, 'Gtk2::Ex::History::Dialog');
+  isa_ok ($dialog, 'Gtk2::Ex::History::Dialog', 'new()');
 
   is ($dialog->VERSION, $want_version, 'VERSION object method');
   ok (eval { $dialog->VERSION($want_version); 1 },
@@ -58,6 +58,8 @@ is (Gtk2::Ex::History::Dialog->VERSION,  $want_version, 'VERSION class method');
       "VERSION object check " . ($want_version + 1000));
 
   $dialog->destroy;
+  Scalar::Util::weaken ($dialog);
+  is ($dialog, undef, 'new() gc when weakened');
 }
 
 #------------------------------------------------------------------------------
@@ -79,7 +81,10 @@ is (Gtk2::Ex::History::Dialog->VERSION,  $want_version, 'VERSION class method');
   isa_ok ($dialog, 'Gtk2::Ex::History::Dialog',
          'popup without history');
   MyTestHelpers::wait_for_event($dialog,'map-event');
+
   $dialog->destroy;
+  Scalar::Util::weaken ($dialog);
+  is ($dialog, undef, 'popup() gc when weakened');
 }
 {
   my $parent = Gtk2::Window->new('toplevel');
@@ -90,6 +95,8 @@ is (Gtk2::Ex::History::Dialog->VERSION,  $want_version, 'VERSION class method');
   MyTestHelpers::wait_for_event($dialog,'map-event');
   $parent->destroy;
   $dialog->destroy;
+  Scalar::Util::weaken ($dialog);
+  is ($dialog, undef, 'popup() with history, gc when weakened');
 }
 
 exit 0;

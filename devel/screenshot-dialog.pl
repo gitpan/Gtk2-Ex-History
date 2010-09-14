@@ -20,8 +20,10 @@
 
 # Usage: perl screenshot.pl [outputfile.png]
 #
-# Draw a history widget and write it to the given output file in PNG format.
-# The default output file is /tmp/screenshot.png
+# Make a screenshot of a sample history dialog and write it to the given
+# output file in PNG format.  The default output file is
+# /tmp/screenshot-dialog.png
+#
 
 use strict;
 use warnings;

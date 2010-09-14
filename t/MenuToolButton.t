@@ -26,53 +26,66 @@ use lib 't';
 use MyTestHelpers;
 BEGIN { MyTestHelpers::nowarnings() }
 
-use Gtk2::Ex::History::Menu;
+use Gtk2::Ex::History::MenuToolButton;
 
 require Gtk2;
 Gtk2->disable_setlocale;  # leave LC_NUMERIC alone for version nums
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
 
-plan tests => 11;
+plan tests => 13;
 
 #-----------------------------------------------------------------------------
 my $want_version = 3;
 my $check_version = $want_version + 1000;
-is ($Gtk2::Ex::History::Menu::VERSION, $want_version, 'VERSION variable');
-is (Gtk2::Ex::History::Menu->VERSION,  $want_version, 'VERSION class method');
-{ ok (eval { Gtk2::Ex::History::Menu->VERSION($want_version); 1 },
+is ($Gtk2::Ex::History::MenuToolButton::VERSION, $want_version, 'VERSION variable');
+is (Gtk2::Ex::History::MenuToolButton->VERSION,  $want_version, 'VERSION class method');
+{ ok (eval { Gtk2::Ex::History::MenuToolButton->VERSION($want_version); 1 },
       "VERSION class check $want_version");
-  ok (! eval { Gtk2::Ex::History::Menu->VERSION($check_version); 1 },
+  ok (! eval { Gtk2::Ex::History::MenuToolButton->VERSION($check_version); 1 },
       "VERSION class check $check_version");
 }
 
 #------------------------------------------------------------------------------
 # new()
 {
-  my $menu = Gtk2::Ex::History::Menu->new;
-  isa_ok ($menu, 'Gtk2::Ex::History::Menu', 'new()');
+  my $item = Gtk2::Ex::History::MenuToolButton->new;
+  isa_ok ($item, 'Gtk2::Ex::History::MenuToolButton');
 
-  is ($menu->VERSION, $want_version, 'VERSION object method');
-  ok (eval { $menu->VERSION($want_version); 1 },
+  is ($item->VERSION, $want_version, 'VERSION object method');
+  ok (eval { $item->VERSION($want_version); 1 },
       "VERSION object check $want_version");
-  ok (! eval { $menu->VERSION($want_version + 1000); 1 },
+  ok (! eval { $item->VERSION($want_version + 1000); 1 },
       "VERSION object check " . ($want_version + 1000));
 
-  $menu->destroy;
-  Scalar::Util::weaken ($menu);
-  is ($menu, undef, 'new() gc when weakened');
+  Scalar::Util::weaken ($item);
+  is ($item, undef, 'gc when weakened');
 }
 
 #------------------------------------------------------------------------------
-# new_popup()
-{
-  my $history = Gtk2::Ex::History->new;
-  my $menu = Gtk2::Ex::History::Menu->new_popup (history => $history);
-  isa_ok ($menu, 'Gtk2::Ex::History::Menu', 'new_popup()');
+# show-menu
 
-  $menu->destroy;
-  Scalar::Util::weaken ($menu);
-  is ($menu, undef, 'new_popup() gc when weakened');
+{
+  my $item = Gtk2::Ex::History::MenuToolButton->new;
+  $item->signal_emit ('show-menu');
+  is ($item->get_menu, undef, 'show-menu with no history leaves no menu');
+}
+
+{
+  my $item = Gtk2::Ex::History::MenuToolButton->new;
+
+  my $history = Gtk2::Ex::History->new;
+  $item->set (history => $history);
+  isnt ($item->get_menu, undef,
+        'with history have menu, so arrow is sensitive');
+
+  $item->signal_emit ('show-menu');
+  my $menu = $item->get_menu;
+  isa_ok ($menu, 'Gtk2::Ex::History::Menu',
+          'get_menu() is a history after show-menu');
+
+  Scalar::Util::weaken ($item);
+  is ($item, undef, 'gc when weakened with history');
 }
 
 exit 0;

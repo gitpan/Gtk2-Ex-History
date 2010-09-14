@@ -55,6 +55,6 @@ msgstr ""
 msgid "Forward"
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Menu.pm:79
+#: lib/Gtk2/Ex/History/Menu.pm:71
 msgid "Open the back/forward history dialog"
 msgstr ""

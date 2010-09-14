@@ -44,6 +44,17 @@ my $toplevel = Gtk2::Window->new('toplevel');
 $toplevel->signal_connect (destroy => sub { Gtk2->main_quit; });
 
 my $actiongroup = Gtk2::ActionGroup->new ("main");
+$actiongroup->add_actions ([
+                            { name => 'FileMenu',  label => '_File'  },
+                            { name     => 'Quit',
+                              stock_id => 'gtk-quit',
+                              callback => sub { $toplevel->destroy },
+                            },
+                            { name     => 'Hello',
+                              stock_id => 'gtk-quit',
+                              callback => sub { print "hello\n" },
+                            }
+                           ]);
 $actiongroup->add_action
   (Gtk2::Ex::History::Action->new (name    => 'Back',
                                    way     => 'back',
@@ -53,14 +64,24 @@ $actiongroup->add_action
                                    way     => 'forward',
                                    history => $history));
 
+# makes a Gtk2::MenuToolButton
+my $recentaction = Gtk2::RecentAction->new (name => 'Recent',
+                                            label => 'Recently',
+                                            stock_id => 'gtk-open');
+$actiongroup->add_action ($recentaction);
+
 my $ui = Gtk2::UIManager->new;
 $ui->insert_action_group ($actiongroup, 0);
 $toplevel->add_accel_group ($ui->get_accel_group);
 $ui->add_ui_from_string ("
 <ui>
-  <toolbar  name='ToolBar'>
+  <toolbar name='ToolBar'>
     <toolitem action='Back'/>
-    <toolitem action='Forward'/>
+    <toolitem action='Recent'>
+      <menu action='FileMenu'>
+        <menuitem action='Quit'/>
+      </menu>
+    </toolitem>
   </toolbar>
 </ui>");
 

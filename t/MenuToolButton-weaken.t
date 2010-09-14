@@ -31,19 +31,20 @@ eval "use Test::Weaken 3; 1"
   or plan skip_all => "Test::Weaken 3 not available -- $@";
 
 require Gtk2::Ex::History;
-require Gtk2::Ex::History::Button;
+require Gtk2::Ex::History::MenuToolButton;
 
 require Gtk2;
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
-plan tests => 2;
+plan tests => 3;
 
 require Test::Weaken::Gtk2;
-
 {
   my $leaks = Test::Weaken::leaks
     ({ constructor => sub {
-         return Gtk2::Ex::History::Button->new;
+         my $item = Gtk2::Ex::History::MenuToolButton->new;
+         my $menu = $item->get_menu;
+         return [ $item, $menu ];
        },
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
@@ -57,12 +58,34 @@ require Test::Weaken::Gtk2;
   my $leaks = Test::Weaken::leaks
     ({ constructor => sub {
          my $history = Gtk2::Ex::History->new;
-         my $button = Gtk2::Ex::History::Button->new (history => $history);
-         return [ $button, $history ];
+         my $item = Gtk2::Ex::History::MenuToolButton->new (history => $history);
+         my $menu = $item->get_menu;
+         return [ $item, $history, $menu ];
        },
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, with history');
+  if ($leaks && defined &explain) {
+    diag "Test-Weaken ", explain $leaks;
+  }
+}
+
+{
+  my $leaks = Test::Weaken::leaks
+    ({ constructor => sub {
+         my $history = Gtk2::Ex::History->new;
+         my $item = Gtk2::Ex::History::MenuToolButton->new (history => $history);
+         my $menu1 = $item->get_menu;
+         # diag $menu1;
+         $item->signal_emit ('show-menu');
+         my $menu2 = $item->get_menu;
+         # diag $menu2;
+         return [ $item, $history, $menu1, $menu2 ];
+       },
+       destructor => \&Test::Weaken::Gtk2::destructor_destroy,
+       contents => \&Test::Weaken::Gtk2::contents_container,
+     });
+  is ($leaks, undef, 'Test::Weaken deep garbage collection, history and show-menu');
   if ($leaks && defined &explain) {
     diag "Test-Weaken ", explain $leaks;
   }

@@ -33,7 +33,7 @@ use Gtk2;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 use Glib::Object::Subclass
   'Gtk2::ListStore',
@@ -115,3 +115,50 @@ sub DRAG_DATA_RECEIVED {
 
 1;
 __END__
+
+=for stopwords treemodel Ryde Gtk2-Ex-History
+
+=head1 NAME
+
+Gtk2::Ex::History::ListStore -- internal part of Gtk2::Ex::History
+
+=head1 DESCRIPTION
+
+This is an internal part of C<Gtk2::Ex::History>, expect it to change or
+disappear.  It's a subclass of C<Gtk2::ListStore> and a list of this type is
+made for each of the back and forward places list and the current place
+item.
+
+It's done as a subclass so as to arrange TreeDragDest to accept row drops
+between the back and forward lists and onto the current item in the
+C<Gtk2::Ex::History::Dialog>, whereas a plain ListStore can only drag and
+drop within itself.
+
+=head1 SEE ALSO
+
+L<Gtk2::Ex::History>,
+L<Gtk2::Ex::History::Dialog>,
+L<Gtk2::ListStore>
+
+=head1 HOME PAGE
+
+L<http://user42.tuxfamily.org/gtk2-ex-history/index.html>
+
+=head1 LICENSE
+
+Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+
+Gtk2-Ex-History is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 3, or (at your option) any later
+version.
+
+Gtk2-Ex-History is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+more details.
+
+You should have received a copy of the GNU General Public License along with
+Gtk2-Ex-History.  If not, see L<http://www.gnu.org/licenses/>.
+
+=cut

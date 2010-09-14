@@ -20,4 +20,4 @@
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/perlmodule.mk
 
-# DEB_INSTALL_EXAMPLES_libgtk2-ex-history-perl = examples/*
+DEB_INSTALL_EXAMPLES_libgtk2-ex-history-perl = examples/*

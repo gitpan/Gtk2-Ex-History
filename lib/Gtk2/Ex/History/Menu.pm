@@ -37,7 +37,7 @@ use Gtk2::Ex::Dashes::MenuItem;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 2;
+our $VERSION = 3;
 
 use Glib::Object::Subclass
   'Gtk2::Ex::MenuView',
@@ -67,17 +67,15 @@ sub INIT_INSTANCE {
   my $dashesitem = Gtk2::Ex::Dashes::MenuItem->new (visible => 1);
   $dashesitem->signal_connect (activate => \&_do_dashesitem_activate);
   $self->prepend ($dashesitem);
+  if ($dashesitem->can('set_tooltip_text')) { # new in Gtk 2.12
+    $dashesitem->set_tooltip_text (__('Open the back/forward history dialog'));
+  }
 }
 
 sub SET_PROPERTY {
   my ($self, $pspec, $newval) = @_;
   my $pname = $pspec->get_name;
   $self->{$pname} = $newval;  # per default GET_PROPERTY
-
-  my $dashesitem = ($self->get_children)[0];
-  if ($dashesitem->can('set_tooltip_text')) { # new in Gtk 2.12
-    $dashesitem->set_tooltip_text (__('Open the back/forward history dialog'));
-  }
 
   if ($pname eq 'history' || $pname eq 'way') {
     my $history = $self->{'history'};
@@ -143,12 +141,13 @@ sub new_popup {
   ###    $button
   ###    $time
   $self->popup (undef, undef, undef, undef, $button, $time);
+  return $self;
 }
 
 1;
 __END__
 
-=for stopwords undef tearoff popup enum
+=for stopwords tearoff popup enum Ryde Gtk2-Ex-History
 
 =head1 NAME
 
@@ -159,15 +158,15 @@ Gtk2::Ex::History::Menu -- menu of "back" or "forward" history items
 =head1 SYNOPSIS
 
  use Gtk2::Ex::History::Menu;
- my $my_history = Gtk2::Ex::History::Menu->new
+ my $my_menu = Gtk2::Ex::History::Menu->new
                  (history => $my_history,
                   way => 'forward');
 
 =head1 OBJECT HIERARCHY
 
 C<Gtk2::Ex::History::Menu> is a subclass of C<Gtk2::Ex::MenuView>, though
-that's only really an implementation detail and the suggestion is to only
-rely on <Gtk2::Menu>.
+that's only really an implementation detail and the suggestion is not to
+rely on more than <Gtk2::Menu>.
 
     Gtk2::Widget
       Gtk2::Container
@@ -178,10 +177,10 @@ rely on <Gtk2::Menu>.
 
 =head1 DESCRIPTION
 
-A C<Gtk2::Ex::History::Menu> is a menu of either the "back" or "forward"
-choices from a C<Gtk2::Ex::History> object.  This is the menu shown by
-C<Gtk2::Ex::History::Button>.  Selecting an item makes the History go back
-or forward to that item.
+A C<Gtk2::Ex::History::Menu> presents a menu of either the "back" or
+"forward" choices from a C<Gtk2::Ex::History> object.  This menu is shown by
+C<Gtk2::Ex::History::Button> and C<Gtk2::Ex::History::MenuToolButton>.
+Selecting an item makes the History go back or forward to that item.
 
     +--------------------+
     | ---  ---  ---  --- |
@@ -210,9 +209,9 @@ be set to say what to display, and C<way> for back or forward.
 =item C<< $histmenu = Gtk2::Ex::History::Menu->new_popup (key => value, ...) >>
 
 Create and popup a new history menu.  The key/value parameters set initial
-properties, plus an additional option
+properties, plus an additional
 
-    event => Gtk2::Gdk::Event object (default undef)
+    event =>   Gtk2::Gdk::Event object or undef
 
 If the event has C<button> and C<time> fields then they're used for the menu
 popup, and if the C<window> field is set then that gives the screen
@@ -232,11 +231,11 @@ popup, and if the C<window> field is set then that gives the screen
 
 =over 4
 
-=item C<history> (C<Gtk2::Ex::History> object, default undef)
+=item C<history> (C<Gtk2::Ex::History> object, default C<undef>)
 
 The history object to display.
 
-=item C<way> (C<Gtk2::Ex::History::Way> enum, default 'back')
+=item C<way> (enum C<Gtk2::Ex::History::Way>, default 'back')
 
 The direction to display, either "back" or "forward".
 
@@ -246,6 +245,7 @@ The direction to display, either "back" or "forward".
 
 L<Gtk2::Ex::History>,
 L<Gtk2::Ex::History::Button>,
+L<Gtk2::Ex::History::MenuToolButton>,
 L<Gtk2::Ex::History::Dialog>,
 L<Gtk2::Ex::MenuView>,
 L<Gtk2::Ex::Dashes::MenuItem>

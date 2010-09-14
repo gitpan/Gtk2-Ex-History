@@ -16,6 +16,11 @@ You should have received a copy of the GNU General Public License along
 with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+Version 3, September 2010
+    - new MenuToolButton
+    - fix Menu new_popup() to return new object per docs
+
 Version 2, August 2010
     - use WidgetEvents for action toolbar button release
 
