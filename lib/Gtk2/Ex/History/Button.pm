@@ -28,7 +28,7 @@ use Gtk2::Ex::History::ModelSensitive;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 3;
+our $VERSION = 4;
 
 use Glib::Object::Subclass
   'Gtk2::Button',

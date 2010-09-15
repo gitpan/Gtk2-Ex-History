@@ -30,7 +30,7 @@ use Gtk2::Ex::History::ModelSensitive;
 
 
 
-our $VERSION = 3;
+our $VERSION = 4;
 
 use Glib::Object::Subclass
   'Gtk2::MenuToolButton',

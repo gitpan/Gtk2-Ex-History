@@ -17,6 +17,9 @@ with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
+Version 4, September 2010
+    - fix Dialog stray 5.010 should be 5.008
+
 Version 3, September 2010
     - new MenuToolButton
     - fix Menu new_popup() to return new object per docs

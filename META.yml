@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Gtk2-Ex-History
-version:            3
+version:            4
 abstract:           History of current, back and forward places for user navigation.
 author:
     - Kevin Ryde <user42@zip.com.au>

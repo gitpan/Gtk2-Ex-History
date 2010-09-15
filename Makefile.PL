@@ -99,7 +99,7 @@ my-dist:
 	make clean
 	perl Makefile.PL
 	make mo
-	make test TEST_FILES=t/0-Test-DistManifest.t
+	make test TEST_FILES=xt/*.t
 	make dist COMPRESS='gzip --force --best'
 
 my-test:

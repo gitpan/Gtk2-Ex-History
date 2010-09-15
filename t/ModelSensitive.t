@@ -31,7 +31,7 @@ use Gtk2::Ex::History::ModelSensitive;
 plan tests => 20;
 
 #-----------------------------------------------------------------------------
-my $want_version = 3;
+my $want_version = 4;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::ModelSensitive::VERSION, $want_version,
     'VERSION variable');

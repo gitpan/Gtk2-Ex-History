@@ -22,7 +22,7 @@
 
 
 package Gtk2::Ex::History::Dialog;
-use 5.010;
+use 5.008;
 use strict;
 use warnings;
 use Glib;
@@ -44,7 +44,7 @@ BEGIN {
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 3;
+our $VERSION = 4;
 
 use Glib::Object::Subclass
   'Gtk2::Dialog',
