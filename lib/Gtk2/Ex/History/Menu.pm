@@ -37,7 +37,7 @@ use Gtk2::Ex::Dashes::MenuItem;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 4;
+our $VERSION = 5;
 
 use Glib::Object::Subclass
   'Gtk2::Ex::MenuView',

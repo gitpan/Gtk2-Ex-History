@@ -39,14 +39,19 @@ Gtk2->init_check
 plan tests => 3;
 
 require Test::Weaken::Gtk2;
+
+sub my_contents {
+  my ($ref) = @_;
+  return (Test::Weaken::Gtk2::contents_container ($ref),
+          Test::Weaken::Gtk2::contents_submenu ($ref));
+}
+
 {
   my $leaks = Test::Weaken::leaks
     ({ constructor => sub {
-         my $item = Gtk2::Ex::History::MenuToolButton->new;
-         my $menu = $item->get_menu;
-         return [ $item, $menu ];
+         return Gtk2::Ex::History::MenuToolButton->new;
        },
-       contents => \&Test::Weaken::Gtk2::contents_container,
+       contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, no history');
   if ($leaks && defined &explain) {
@@ -58,11 +63,10 @@ require Test::Weaken::Gtk2;
   my $leaks = Test::Weaken::leaks
     ({ constructor => sub {
          my $history = Gtk2::Ex::History->new;
-         my $item = Gtk2::Ex::History::MenuToolButton->new (history => $history);
-         my $menu = $item->get_menu;
-         return [ $item, $history, $menu ];
+         my $item = Gtk2::Ex::History::MenuToolButton->new (history=>$history);
+         return [ $item, $history ];
        },
-       contents => \&Test::Weaken::Gtk2::contents_container,
+       contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, with history');
   if ($leaks && defined &explain) {
@@ -78,12 +82,11 @@ require Test::Weaken::Gtk2;
          my $menu1 = $item->get_menu;
          # diag $menu1;
          $item->signal_emit ('show-menu');
-         my $menu2 = $item->get_menu;
-         # diag $menu2;
-         return [ $item, $history, $menu1, $menu2 ];
+         # diag $item->get_menu;
+         return [ $item, $history, $menu1 ];
        },
        destructor => \&Test::Weaken::Gtk2::destructor_destroy,
-       contents => \&Test::Weaken::Gtk2::contents_container,
+       contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, history and show-menu');
   if ($leaks && defined &explain) {

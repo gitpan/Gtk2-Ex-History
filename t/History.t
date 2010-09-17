@@ -30,7 +30,7 @@ require Gtk2::Ex::History;
 
 
 #-----------------------------------------------------------------------------
-my $want_version = 4;
+my $want_version = 5;
 is ($Gtk2::Ex::History::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
 { ok (eval { Gtk2::Ex::History->VERSION($want_version); 1 },
@@ -94,8 +94,14 @@ is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
 
 {
   my $history = Gtk2::Ex::History->new;
-  is ($history->signal_emit ('place-to-text', 'abc'), 'abc');
-  is ($history->signal_emit ('place-to-text', $history), "$history");
+  is ($history->signal_emit ('place-to-text', 'abc'), 'abc',
+      '_default_place_to_text() string arg');
+  {
+    my $place = ['hello'];
+    my $place_str = "$place";
+    is ($history->signal_emit ('place-to-text', $place), $place_str,
+        '_default_place_to_text() stringize ref');
+  }
 }
 
 #------------------------------------------------------------------------------
@@ -112,11 +118,12 @@ is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
                               return "xx $place yy";
                             });
   my $got = $history->signal_emit ('place-to-text', 'abc');
-  ok ($to_text_called, 'place-to-text handler called');
-  ok ($to_text_h, $history);
-  is ($got, "xx abc yy", 'place-to-text handler result');
-  is ($history->signal_emit ('place-to-text', $history), "xx $history yy",
-      'place-to-text handler 1,2');
+  ok ($to_text_called, 'place-to-text handler - called');
+  is ($to_text_h, $history, 'place-to-text handler - history object arg');
+  is ($got, "xx abc yy", 'place-to-text handler - result');
+  is ($history->signal_emit ('place-to-text', $history),
+      "xx $history yy",
+      'place-to-text handler - 1,2');
 }
 
 #------------------------------------------------------------------------------

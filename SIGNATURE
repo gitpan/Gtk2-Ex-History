@@ -15,12 +15,12 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 842745cb706f8f2126506f544492f7a80dbe29b3 COPYING
-SHA1 0abdf91d58632ede45cab9f05217db0b4a986191 Changes
+SHA1 3842c8372d7432381151108b5950e9840e024067 Changes
 SHA1 84ed935480680232acfb6151f5de57c68cb52750 MANIFEST
 SHA1 e6e7c2904ea5d300c0ddf70fc5a80f5005229aa9 MANIFEST.SKIP
-SHA1 4585c10ce32483cc223e22232c1561de1351a322 META.yml
+SHA1 8535069c8b0b83e785c24e8535b18db395f8c9d8 META.yml
 SHA1 daea7dd9b0ce08b9f79b257ed16658b986045e12 Makefile.PL
-SHA1 8bc4feef832adb89d7b73849a2b852475bc004d8 debian/changelog
+SHA1 f63449402e775e454b3645adb4c0f48dec917fa2 debian/changelog
 SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
 SHA1 dfe3948f35afdcc3a749feb172f3f65fece73233 debian/control
 SHA1 9fb0eaa5987dbc1ffd0d958ce41710f19b5710c3 debian/copyright
@@ -37,29 +37,29 @@ SHA1 1097eced2bb7d3a158fb23aaae8641f86fecd8b1 devel/uri.pl
 SHA1 9cc53eb6641ae5be424041fd863d32d431525da0 examples/iri.pl
 SHA1 3cf3345a9177dbe362dfc8fbf192272f4a611ca8 inc/MyMakeMakerExtras.pm
 SHA1 a2fa0855f3a1ea6140956ec567bea259e0099893 inc/MyMakeMakerGettext.pm
-SHA1 f892128b8fc093b659d13a0ace0cf44b7d5786a6 lib/Gtk2/Ex/History.pm
-SHA1 a4784e5ac1ad5820eb8aea4cf45f5a1e804decff lib/Gtk2/Ex/History/Action.pm
-SHA1 cef8180d47dc99a259cf72d366440ce439285ee7 lib/Gtk2/Ex/History/Button.pm
-SHA1 c65cc898b64e1fccea1ec95fdb85f12419364f82 lib/Gtk2/Ex/History/Dialog.pm
-SHA1 d01a0c8e0a499123ef3c7abd20a79950f0ea9517 lib/Gtk2/Ex/History/ListStore.pm
-SHA1 2f156ee8e414166adb2e06b2cc353b6c54ab0a2f lib/Gtk2/Ex/History/Menu.pm
-SHA1 158f3ce6b4193d767e8858217f08d24487de0525 lib/Gtk2/Ex/History/MenuToolButton.pm
-SHA1 2b9efebfc689b62a4a382be25c86ead50c1ca9c1 lib/Gtk2/Ex/History/ModelSensitive.pm
+SHA1 fbc2e1a69f660541ca67fa1fa26b2d8f41a46766 lib/Gtk2/Ex/History.pm
+SHA1 dea4e723ea6466f0b13d1df449202eeb248ade3b lib/Gtk2/Ex/History/Action.pm
+SHA1 67801b0c6f984bc54fdc5b06a9d1302d3d00ef64 lib/Gtk2/Ex/History/Button.pm
+SHA1 abffadb158a668d181892c35c902fee798680726 lib/Gtk2/Ex/History/Dialog.pm
+SHA1 11abdd7b5663dffe2ffd3461eebce612d6c83518 lib/Gtk2/Ex/History/ListStore.pm
+SHA1 87ed7b2ef07c762997edda27e5401897b6ab7aa5 lib/Gtk2/Ex/History/Menu.pm
+SHA1 7ab20274d8851a7c34ad67245ef58522129da0c7 lib/Gtk2/Ex/History/MenuToolButton.pm
+SHA1 54ec5ae1a7fc257bdf1d0b91ff324aa28c31c88d lib/Gtk2/Ex/History/ModelSensitive.pm
 SHA1 51a356e29525204ee2fd404dbf96795e73ddaba0 po/Gtk2-Ex-History.pot
 SHA1 ceab03b1599a11baa24c259e5f74931ab99b9ef6 po/README
 SHA1 397c9a8468a3f3169758de40f1325cc675642553 po/header.pot
 SHA1 a71abaa32d10a3aeb36b68f8899238d890250ac0 t/Button-weaken.t
-SHA1 8c2ff4068eb7f130c93096d22dc9b67b2c2e8524 t/Button.t
+SHA1 31943182a216d109e4b3b30d915e443c5484a9e1 t/Button.t
 SHA1 add20dbeb6f40dca209c3e6a99016e28b3d10da3 t/Dialog-weaken.t
-SHA1 c17e8f3165153bcbd3cc734c65c49669ab7470cf t/Dialog.t
+SHA1 38f69cd89c49515fb10c4f7d9c62f1d2e9c3809b t/Dialog.t
 SHA1 33a1836eee29c72ca4cb9a1d8b9d404087e85991 t/History-weaken.t
-SHA1 b449d64d3a005b9bcde2a063891d4b0b60c19abb t/History.t
+SHA1 0986e5dfe10f8734d8abb88df6a55921b82e125d t/History.t
 SHA1 1797eb324606371115bd8b2900336f5664254900 t/Menu-weaken.t
-SHA1 417ac58ca9e0c9acb6f0eeeafc38b9532e0fa0c8 t/Menu.t
-SHA1 67712ac5c935a65a877a2249c29287f8bf3746e6 t/MenuToolButton-weaken.t
-SHA1 39ecd15e71884696a12c897ce0b0b87e21d078e0 t/MenuToolButton.t
-SHA1 2bdb312b8007b991ebce22fdc506c371afbb28f1 t/ModelSensitive.t
-SHA1 cc9d34bca6c40211dd6aa8fee844bb1a7f908461 t/MyTestHelpers.pm
+SHA1 cf56150379eeb0a9794a2578e6c9d7863562e342 t/Menu.t
+SHA1 5b464b6e6d3b7da1f662a57503c1d7df229706c0 t/MenuToolButton-weaken.t
+SHA1 6fb500c7deb88b8a92e297712a3f7a1164fb3a1e t/MenuToolButton.t
+SHA1 7d56654693d971fc0811afb13b04a14f247bac54 t/ModelSensitive.t
+SHA1 5e5680b471811244fe93571efc23e7b6089cac3b t/MyTestHelpers.pm
 SHA1 9127f78a0dfa04976acbb979dd7862ef59a74c58 xt/0-META-read.t
 SHA1 37abd43b41068804ea4bb099fdd89af21be82926 xt/0-Test-DistManifest.t
 SHA1 8f93fb4c8f0424a4442cc93c9a2e86342ef55281 xt/0-Test-Pod.t
@@ -68,7 +68,7 @@ SHA1 fb517c2fae5ddac559318bf6a224949115ea3129 xt/0-Test-YAML-Meta.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFMkUMrLFMCIV9q3ToRAobjAKCxEy+7F89SqmLBPDDXp1KkBclHVACgi7x6
-ccbWSbbQxh8RbsgBR1tfi3c=
-=FWdD
+iD8DBQFMk+BuLFMCIV9q3ToRAqyUAJ4+iCs45QpyjxvdeZEYRzblrGipFwCdFebZ
++gvSPakmdBWk1hBvna1phHs=
+=+LnM
 -----END PGP SIGNATURE-----
