@@ -54,8 +54,8 @@ sub my_contents {
        contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, no history');
-  if ($leaks && defined &explain) {
-    diag "Test-Weaken ", explain $leaks;
+  if ($leaks) {
+    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
   }
 }
 
@@ -69,8 +69,8 @@ sub my_contents {
        contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, with history');
-  if ($leaks && defined &explain) {
-    diag "Test-Weaken ", explain $leaks;
+  if ($leaks) {
+    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
   }
 }
 
@@ -89,8 +89,8 @@ sub my_contents {
        contents => \&my_contents,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection, history and show-menu');
-  if ($leaks && defined &explain) {
-    diag "Test-Weaken ", explain $leaks;
+  if ($leaks) {
+    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
   }
 }
 

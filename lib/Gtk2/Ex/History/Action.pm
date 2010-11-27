@@ -23,7 +23,7 @@ use Scalar::Util;
 
 use Gtk2 1.220; # for Gtk2::EVENT_PROPAGATE
 use Gtk2::Ex::History;
-use Gtk2::Ex::History::ModelSensitive;
+use Glib::Ex::ConnectProperties 13;  # v.13 for model-rows
 
 use Locale::TextDomain ('Gtk2-Ex-History');
 use Locale::Messages;
@@ -33,7 +33,7 @@ BEGIN {
                                             \&Locale::Messages::turn_utf_8_on);
 }
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
@@ -145,8 +145,9 @@ sub _update {
                            : __('Go forward.')));
 
   my $history = $self->{'history'};
-  $self->{'model_sensitive'} = Gtk2::Ex::History::ModelSensitive->new
-    ($self, $history && $history->model($way));
+  $self->{'connp'} = $history && Glib::Ex::ConnectProperties->dynamic
+    ([$history->model($way), 'model-rows#not-empty'],
+     [$self, 'sensitive']);
 }
 
 sub _do_activate {

@@ -16,8 +16,6 @@
 # with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
 
-# An internal part of Gtk2::Ex::History.
-#
 # The TreeDragDest handlers here allow row dragging between the back,
 # forward and current lists as displayed in Gtk2::Ex::History::Dialog.
 #
@@ -33,7 +31,7 @@ use Gtk2;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 use Glib::Object::Subclass
   'Gtk2::ListStore',
@@ -116,29 +114,38 @@ sub DRAG_DATA_RECEIVED {
 1;
 __END__
 
-=for stopwords treemodel Ryde Gtk2-Ex-History
+=for stopwords treemodel Ryde Gtk2-Ex-History TreeDragDest Gtk ListStore ListStores
 
 =head1 NAME
 
 Gtk2::Ex::History::ListStore -- internal part of Gtk2::Ex::History
 
+=head1 OBJECT HIERARCHY
+
+C<Gtk2::Ex::History::ListStore> is a subclass of C<Gtk2::ListStore>.
+
+    Glib::Object
+      Gtk2::ListStore
+        Gtk2::Ex::History::ListStore
+
 =head1 DESCRIPTION
 
-This is an internal part of C<Gtk2::Ex::History>, expect it to change or
-disappear.  It's a subclass of C<Gtk2::ListStore> and a list of this type is
-made for each of the back and forward places list and the current place
-item.
+This is an internal part of C<Gtk2::Ex::History>.  Expect it to change or
+disappear.
 
-It's done as a subclass so as to arrange TreeDragDest to accept row drops
-between the back and forward lists and onto the current item in the
-C<Gtk2::Ex::History::Dialog>, whereas a plain ListStore can only drag and
-drop within itself.
+A list store of this type is made for each of the back and forward places
+lists and the current place item.  It's done as a subclass so as to arrange
+TreeDragDest to accept row drops between the back and forward lists and onto
+the current item, as can be done in C<Gtk2::Ex::History::Dialog>.  As of Gtk
+circa 2.20 plain ListStore can only drag and drop within itself, not between
+ListStores, even with the same column types.
 
 =head1 SEE ALSO
 
 L<Gtk2::Ex::History>,
 L<Gtk2::Ex::History::Dialog>,
-L<Gtk2::ListStore>
+L<Gtk2::ListStore>,
+L<Gtk2::TreeDragDest>
 
 =head1 HOME PAGE
 

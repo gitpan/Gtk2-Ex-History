@@ -20,15 +20,14 @@ use 5.008;
 use strict;
 use warnings;
 use Gtk2 1.220;
-use Gtk2::Ex::History;
-use Scalar::Util;
 
-use Gtk2::Ex::History::ModelSensitive;
+use Gtk2::Ex::History;
+use Glib::Ex::ConnectProperties 13;  # v.13 for model-rows
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 use Glib::Object::Subclass
   'Gtk2::Button',
@@ -52,7 +51,10 @@ use Glib::Object::Subclass
 
 sub INIT_INSTANCE {
   my ($self) = @_;
-  _update ($self);
+  # for some reason these setting don't take effect here but must be done in
+  # SET_PROPERTY below
+  $self->set_label ("gtk-go-back"); # default
+  $self->set_use_stock (1);
 }
 
 sub SET_PROPERTY {
@@ -64,20 +66,18 @@ sub SET_PROPERTY {
 
   # should only need to update the icon when setting 'way', but as of gtk
   # 2.18 the icon in INIT_INSTANCE doesn't take effect -- something about
-  # "constructor"
-  _update ($self);
-}
-
-sub _update {
-  my ($self) = @_;
+  # "constructor" -- so as a workaround apply the stock icon when setting
+  # 'history' too
+  #
   my $way = $self->get('way');
-
   $self->set_label ("gtk-go-$way");
   $self->set_use_stock (1);
 
+  # the history model, either the back or forward one
   my $history = $self->{'history'};
-  $self->{'sensitive'} = $history && Gtk2::Ex::History::ModelSensitive->new
-    ($self, $history->model($way));
+  $self->{'connp'} = $history && Glib::Ex::ConnectProperties->dynamic
+    ([$history->model($way), 'model-rows#not-empty'],
+     [$self, 'sensitive']);
 }
 
 # 'clicked' class closure
@@ -186,6 +186,21 @@ The "stock" icon is set from this, either C<gtk-go-back> or
 C<gtk-go-forward>.
 
 =back
+
+=head1 BUGS
+
+The initial button display is empty, not the intended default C<way> "back".
+Setting a history object or an explicit initial C<way> works.
+
+    my $button = Gtk2::Ex::History::Button->new
+                    (way => 'back');    # explicit as a workaround
+
+It's something to do with object "constructor" stuff making the stock icon
+setup in C<INIT_INSTANCE> not work.  Usually you set a C<history> in
+initially and that's jigged up to kick it into life.
+
+    my $button = Gtk2::Ex::History::Button->new
+                    (history => $history);    # ok, "back" button
 
 =head1 SEE ALSO
 

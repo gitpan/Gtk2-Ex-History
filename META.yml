@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Gtk2-Ex-History
-version:            5
+version:            6
 abstract:           History of current, back and forward places for user navigation.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -11,7 +11,9 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
+    Glib::Ex::ConnectProperties:  13
     Glib::Ex::FreezeNotify:  1
+    Glib::Ex::ObjectBits:  12
     Glib::Ex::SignalBits:  9
     Glib::Ex::SignalIds:  1
     Glib::Object::Subclass:  0
@@ -53,7 +55,7 @@ optional_features:
             Test::DistManifest:  0
             Test::Pod:           1.00
             Test::Synopsis:      0
-            Test::Weaken:        2
+            Test::Weaken:        3
             Test::YAML::Meta:    0.15
             YAML:                0
             YAML::Syck:          0

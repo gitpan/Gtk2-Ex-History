@@ -42,9 +42,10 @@ MyMakeMakerExtras::WriteMakefile
                     'Gtk2' => '1.220',
 
                     # my Glib-Ex-ObjectBits
-                    'Glib::Ex::SignalIds' => 1,
+                    'Glib::Ex::ObjectBits'   => 12, # new in version 12
+                    'Glib::Ex::SignalIds'    => 1,
                     'Glib::Ex::FreezeNotify' => 1,
-                    'Glib::Ex::SignalBits' => 9,  # new in version 9
+                    'Glib::Ex::SignalBits'   => 9,  # new in version 9
 
                     # my Gtk2-Ex-WidgetBits
                     'Gtk2::Ex::TreeModelBits' => 16, # for extra remove args
@@ -52,6 +53,7 @@ MyMakeMakerExtras::WriteMakefile
                     'Gtk2::Ex::WidgetEvents'  => 21, # new in version 21
                     'Test::Weaken::Gtk2'      => 17, # new in version 17
 
+                    'Glib::Ex::ConnectProperties' => 13, # v.13 model-rows
                     'Gtk2::Ex::Dashes::MenuItem' => 0,
                     'Gtk2::Ex::MenuView' => 0,
 
@@ -69,7 +71,7 @@ MyMakeMakerExtras::WriteMakefile
         optional_features
         => { maximum_tests
              => { description => 'Have "make test" do as much as possible.',
-                  requires => { 'Test::Weaken' => 2,
+                  requires => { 'Test::Weaken' => 3,
                               },
                 },
              maximum_devel
@@ -127,7 +129,7 @@ my-test:
 	DISPLAY=:0; export DISPLAY;                                           \
 	make test;							      \
 	DISPLAY=:0; export DISPLAY;                                           \
-	HARNESS_PERL_SWITCHES="-MTest::Without::Gtk2Things=verbose,insert_with_values" make test; \
+	HARNESS_PERL_SWITCHES="-MTest::Without::Gtk2Things=verbose,insert_with_values,widget_tooltip" make test; \
 	HARNESS_PERL_SWITCHES="-MTest::Without::Module=Test::Weaken" make test;	\
                                                                               \
 	echo 'Test without DISPLAY';                                          \

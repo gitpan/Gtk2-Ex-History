@@ -37,8 +37,8 @@ require Gtk2::Ex::History;
     ({ constructor => sub { return Gtk2::Ex::History->new },
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection');
-  if ($leaks && defined &explain) {
-    diag "Test-Weaken ", explain $leaks;
+  if ($leaks) {
+    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
   }
 }
 

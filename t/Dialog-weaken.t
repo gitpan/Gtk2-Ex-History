@@ -50,8 +50,8 @@ require Test::Weaken::Gtk2;
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection');
-  if ($leaks && defined &explain) {
-    diag "Test-Weaken ", explain $leaks;
+  if ($leaks) {
+    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
   }
 }
 

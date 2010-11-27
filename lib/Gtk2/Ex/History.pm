@@ -30,7 +30,7 @@ use Glib::Ex::FreezeNotify;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 
 # place-to-icon-pixbuf

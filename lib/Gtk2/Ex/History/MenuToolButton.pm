@@ -20,17 +20,15 @@ use 5.008;
 use strict;
 use warnings;
 use Gtk2 1.220;
+use Glib::Ex::ConnectProperties 13;  # v.13 for model-rows
 use Gtk2::Ex::History;
-use Scalar::Util;
-
-use Gtk2::Ex::History::ModelSensitive;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
 
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 use Glib::Object::Subclass
   'Gtk2::MenuToolButton',
@@ -80,8 +78,9 @@ sub SET_PROPERTY {
                   way => $way);
     }
   }
-  $self->{'sensitive'} = $history && Gtk2::Ex::History::ModelSensitive->new
-    ($self, $history->model($way));
+  $self->{'connp'} = $history && Glib::Ex::ConnectProperties->dynamic
+    ([$history->model($way), 'model-rows#not-empty'],
+     [$self, 'sensitive']);
 }
 
 sub _do_show_menu {

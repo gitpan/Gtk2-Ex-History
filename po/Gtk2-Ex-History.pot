@@ -38,23 +38,23 @@ msgstr ""
 msgid "Go forward."
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Dialog.pm:63
+#: lib/Gtk2/Ex/History/Dialog.pm:62
 #, perl-brace-format
 msgid "{appname}: History"
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Dialog.pm:77
+#: lib/Gtk2/Ex/History/Dialog.pm:76
 msgid "Current"
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Dialog.pm:126
+#: lib/Gtk2/Ex/History/Dialog.pm:125
 msgid "Back"
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Dialog.pm:126
+#: lib/Gtk2/Ex/History/Dialog.pm:125
 msgid "Forward"
 msgstr ""
 
-#: lib/Gtk2/Ex/History/Menu.pm:71
+#: lib/Gtk2/Ex/History/Menu.pm:74
 msgid "Open the back/forward history dialog"
 msgstr ""

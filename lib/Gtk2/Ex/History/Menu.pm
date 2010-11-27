@@ -22,6 +22,7 @@ use warnings;
 use Gtk2 1.220;
 use Scalar::Util;
 
+use Glib::Ex::ObjectBits;
 use Gtk2::Ex::History;
 use Gtk2::Ex::MenuView;
 
@@ -37,7 +38,7 @@ use Gtk2::Ex::Dashes::MenuItem;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 5;
+our $VERSION = 6;
 
 use Glib::Object::Subclass
   'Gtk2::Ex::MenuView',
@@ -67,9 +68,10 @@ sub INIT_INSTANCE {
   my $dashesitem = Gtk2::Ex::Dashes::MenuItem->new (visible => 1);
   $dashesitem->signal_connect (activate => \&_do_dashesitem_activate);
   $self->prepend ($dashesitem);
-  if ($dashesitem->can('set_tooltip_text')) { # new in Gtk 2.12
-    $dashesitem->set_tooltip_text (__('Open the back/forward history dialog'));
-  }
+  Glib::Ex::ObjectBits::set_property_maybe
+      ($dashesitem,
+       # tooltip-text new in Gtk 2.12
+       tooltip_text => __('Open the back/forward history dialog'));
 }
 
 sub SET_PROPERTY {

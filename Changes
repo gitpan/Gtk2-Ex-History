@@ -17,6 +17,9 @@ with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
+Version 6, November 2010
+    - use ConnectProperties for button sensitivities
+
 Version 5, September 2010
     - tests fix non-string test name
 
