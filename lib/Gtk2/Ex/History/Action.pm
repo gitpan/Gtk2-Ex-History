@@ -33,7 +33,7 @@ BEGIN {
                                             \&Locale::Messages::turn_utf_8_on);
 }
 
-our $VERSION = 6;
+our $VERSION = 7;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;

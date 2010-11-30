@@ -28,7 +28,7 @@ use Gtk2::Ex::History;
 
 
 
-our $VERSION = 6;
+our $VERSION = 7;
 
 use Glib::Object::Subclass
   'Gtk2::MenuToolButton',

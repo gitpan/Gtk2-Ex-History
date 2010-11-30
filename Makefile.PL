@@ -47,7 +47,7 @@ MyMakeMakerExtras::WriteMakefile
                     'Glib::Ex::FreezeNotify' => 1,
                     'Glib::Ex::SignalBits'   => 9,  # new in version 9
 
-                    # my Gtk2-Ex-WidgetBits
+                    # my Gtk2 Ex WidgetBits
                     'Gtk2::Ex::TreeModelBits' => 16, # for extra remove args
                     'Gtk2::Ex::Units'         => 13, # new in version 13
                     'Gtk2::Ex::WidgetEvents'  => 21, # new in version 21

@@ -2,20 +2,20 @@
 
 # Copyright 2010 Kevin Ryde
 
-# This file is part of Gtk2-Ex-WidgetBits.
+# This file is part of Gtk2-Ex-History.
 #
-# Gtk2-Ex-WidgetBits is free software; you can redistribute it and/or modify
+# Gtk2-Ex-History is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by the
 # Free Software Foundation; either version 3, or (at your option) any later
 # version.
 #
-# Gtk2-Ex-WidgetBits is distributed in the hope that it will be useful, but
+# Gtk2-Ex-History is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 # for more details.
 #
 # You should have received a copy of the GNU General Public License along
-# with Gtk2-Ex-WidgetBits.  If not, see <http://www.gnu.org/licenses/>.
+# with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
 use 5.008;
 use strict;
@@ -30,7 +30,7 @@ require Gtk2::Ex::History;
 
 
 #-----------------------------------------------------------------------------
-my $want_version = 6;
+my $want_version = 7;
 is ($Gtk2::Ex::History::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
 { ok (eval { Gtk2::Ex::History->VERSION($want_version); 1 },
@@ -72,21 +72,21 @@ is (Gtk2::Ex::History->VERSION,  $want_version, 'VERSION class method');
 {
   my $history = Gtk2::Ex::History->new;
   my $equal_called = 0;
-  my $equal_h;
+  my $equal_history;
   $history->signal_connect (place_equal => sub {
                               my ($h, $p1, $p2) = @_;
-                              $equal_h = $h;
+                              $equal_history = $h;
                               $equal_called = 1;
                               return ($p1 == $p2);
                             });
   my $got = $history->signal_emit ('place-equal', 1, 1);
-  ok ($equal_called, 'place-equal handler called');
-  ok ($equal_h, $history);
-  is (  $got, 1, 'place-equal handler result');
+  ok ($equal_called, 'place-equal handler - called');
+  is ($equal_history, $history, 'place-equal handler - history obj arg');
+  is (  $got, 1, 'place-equal handler - result');
   ok (! $history->signal_emit ('place-equal', 1, 2),
-      'place-equal handler 1,2');
+      'place-equal handler - args 1 2 are not equal');
   ok (  $history->signal_emit ('place-equal', '1.0', 1),
-        'place-equal handler 1.0,1');
+        'place-equal handler - args 1.0 1 are equal');
 }
 
 #------------------------------------------------------------------------------

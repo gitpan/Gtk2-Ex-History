@@ -31,7 +31,7 @@ use Gtk2;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 6;
+our $VERSION = 7;
 
 use Glib::Object::Subclass
   'Gtk2::ListStore',

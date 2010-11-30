@@ -28,7 +28,7 @@ use Glib::Ex::SignalIds;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 6;
+our $VERSION = 7;
 
 sub new {
   my ($class, $target, $model) = @_;
