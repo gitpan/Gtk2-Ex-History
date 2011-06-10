@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -50,9 +50,7 @@ require Test::Weaken::Gtk2;
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection');
-  if ($leaks) {
-    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
-  }
+  MyTestHelpers::test_weaken_show_leaks($leaks);
 }
 
 {
@@ -66,9 +64,7 @@ require Test::Weaken::Gtk2;
        contents => \&Test::Weaken::Gtk2::contents_container,
      });
   is ($leaks, undef, 'Test::Weaken deep garbage collection - with popup');
-  if ($leaks) {
-    eval { diag "Test-Weaken ", explain($leaks) }; # explain in Test::More 0.82
-  }
+  MyTestHelpers::test_weaken_show_leaks($leaks);
 }
 
 exit 0;

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2008, 2009, 2010 Kevin Ryde
+# Copyright 2008, 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -23,6 +23,7 @@
 # Draw a history widget and write it to the given output file in PNG format.
 # The default output file is /tmp/screenshot.png
 
+use 5.008;
 use strict;
 use warnings;
 use File::Basename;
@@ -72,7 +73,7 @@ Glib::Timeout->add
        ($output_filename, 'png',
         'tEXt::Title'         => 'History Button Screenshot',
         'tEXt::Author'        => 'Kevin Ryde',
-        'tEXt::Copyright'     => 'Copyright 2010 Kevin Ryde',
+        'tEXt::Copyright'     => 'Copyright 2010, 2011 Kevin Ryde',
         'tEXt::Creation Time' => POSIX::strftime (STRFTIME_FORMAT_RFC822,
                                                   localtime(time)),
         'tEXt::Description'   => 'A sample screenshot of a Gtk2::Ex::History::Button display',

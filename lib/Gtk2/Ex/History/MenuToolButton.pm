@@ -1,4 +1,4 @@
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -28,7 +28,7 @@ use Gtk2::Ex::History;
 
 
 
-our $VERSION = 7;
+our $VERSION = 8;
 
 use Glib::Object::Subclass
   'Gtk2::MenuToolButton',
@@ -36,15 +36,15 @@ use Glib::Object::Subclass
                show_menu => \&_do_show_menu },
   properties => [ Glib::ParamSpec->object
                   ('history',
-                   'history',
-                   'Blurb.',
+                   'History object',
+                   'The history object to act on.',
                    'Gtk2::Ex::History',
                    Glib::G_PARAM_READWRITE),
 
                   Glib::ParamSpec->enum
                   ('way',
-                   'way',
-                   'Blurb.',
+                   'Which way',
+                   'Which way to go in the history when clicked, either back or forward.',
                    'Gtk2::Ex::History::Way',
                    'back',
                    Glib::G_PARAM_READWRITE),
@@ -211,7 +211,7 @@ L<http://user42.tuxfamily.org/gtk2-ex-history/index.html>
 
 =head1 LICENSE
 
-Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+Gtk2-Ex-History is Copyright 2010, 2011 Kevin Ryde
 
 Gtk2-Ex-History is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free

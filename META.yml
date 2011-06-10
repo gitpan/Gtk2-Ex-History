@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Gtk2-Ex-History
-version:            7
+version:            8
 abstract:           History of current, back and forward places for user navigation.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -34,9 +34,10 @@ no_index:
     directory:
         - t
         - inc
+        - xt
         - devel
         - examples
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+generated_by:       ExtUtils::MakeMaker version 6.56
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4

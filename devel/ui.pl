@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License along
 # with Gtk2-Ex-History.  If not, see <http://www.gnu.org/licenses/>.
 
+use 5.008;
 use strict;
 use warnings;
 use Gtk2 '-init';
@@ -37,7 +38,7 @@ $history->goto ('GGG');
 $history->back(3);
 $history->signal_connect
   ('notify::current' => sub {
-     print "$progname: notify::current ",$history->get('current'),"\n";;
+     print "$progname: notify::current ",$history->get('current'),"\n";
    });
 
 my $toplevel = Gtk2::Window->new('toplevel');
@@ -53,7 +54,7 @@ $actiongroup->add_actions ([
                             { name     => 'Hello',
                               stock_id => 'gtk-quit',
                               callback => sub { print "hello\n" },
-                            }
+                            },
                            ]);
 $actiongroup->add_action
   (Gtk2::Ex::History::Action->new (name    => 'Back',

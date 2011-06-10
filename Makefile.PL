@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -65,23 +65,23 @@ MyMakeMakerExtras::WriteMakefile
                     'Locale::Messages'   => 0,
                    },
 
-   META_MERGE
-   => { resources
-        => { homepage => 'http://user42.tuxfamily.org/gtk2-ex-history/index.html' },
-        optional_features
-        => { maximum_tests
-             => { description => 'Have "make test" do as much as possible.',
-                  requires => { 'Test::Weaken' => 3,
-                              },
-                },
-             maximum_devel
-             => { description => 'Stuff used variously for development.',
-                  requires => { 'Smart::Comments'    => 0,
-                                'lib::abs' => 0,
-                                'Scalar::Lazy' => 0,
-                              } },
-           },
-      },
+   META_MERGE =>
+   { resources =>
+     { homepage => 'http://user42.tuxfamily.org/gtk2-ex-history/index.html' },
+     optional_features =>
+     { maximum_tests =>
+       { description => 'Have "make test" do as much as possible.',
+         requires => { 'Test::Weaken' => 3,
+                     },
+       },
+       maximum_devel =>
+       { description => 'Stuff used variously for development.',
+         requires => { 'Smart::Comments'    => 0,
+                       'lib::abs' => 0,
+                       'Scalar::Lazy' => 0,
+                     } },
+     },
+   },
   );
 
 #------------------------------------------------------------------------------
@@ -114,7 +114,6 @@ my-test:
 	cpansign -v;							      \
 	perl Makefile.PL SIGN=0;					      \
                                                                               \
-	make check-debug-constants;					      \
 	make check-spelling;						      \
 	(cd t; perl -MTest::CheckChanges -e 'ok_changes()');		      \
 	make check-fuzzy-po;						      \

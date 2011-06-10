@@ -1,4 +1,4 @@
-# Copyright 2007, 2008, 2009, 2010 Kevin Ryde
+# Copyright 2007, 2008, 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -30,7 +30,7 @@ use Glib::Ex::FreezeNotify;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 7;
+our $VERSION = 8;
 
 
 # place-to-icon-pixbuf
@@ -70,14 +70,14 @@ use Glib::Object::Subclass
 
   properties => [ Glib::ParamSpec->scalar
                   ('current',
-                   'current',
-                   'Blurb.',
+                   'Current place object',
+                   'Current place object in the history.',
                    Glib::G_PARAM_READWRITE),
 
                   Glib::ParamSpec->int
                   ('max-history',
-                   'max-history',
-                   'Blurb.',
+                   'Maximum history count',
+                   'The maximum number of places to keep in the history (backwards and forwards counted separately currently).',
                    0,                  # min
                    POSIX::INT_MAX(),   # max
                    40,                 # default
@@ -86,7 +86,7 @@ use Glib::Object::Subclass
                   # this one not documented yet ...
                   Glib::ParamSpec->boolean
                   ('use-markup',
-                   'use-markup',
+                   'Use markup',
                    'Blurb.',
                    0,  # default
                    Glib::G_PARAM_READWRITE),
@@ -367,6 +367,9 @@ For filenames C<Glib::filename_display_name()> (see L<Glib>) gives a
 reasonable form to display, interpreting non-ASCII in the filesystem locale
 charset.
 
+See F<examples/iri.pl> in the Gtk2-Ex-History sources for a complete program
+turning URL internationalized %-encodings into wide characters for display.
+
 =item C<place-equal> (scalar, scalar; return boolean)
 
 This signal is emitted to check equality of two places.  C<goto> and other
@@ -389,7 +392,7 @@ L<http://usr42.tuxfamily.org/gtk2-ex-history/index.html>
 
 =head1 LICENSE
 
-Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+Gtk2-Ex-History is Copyright 2010, 2011 Kevin Ryde
 
 Gtk2-Ex-History is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free

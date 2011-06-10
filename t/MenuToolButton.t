@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -33,10 +33,10 @@ Gtk2->disable_setlocale;  # leave LC_NUMERIC alone for version nums
 Gtk2->init_check
   or plan skip_all => 'due to no DISPLAY available';
 
-plan tests => 13;
+plan tests => 14;
 
 #-----------------------------------------------------------------------------
-my $want_version = 7;
+my $want_version = 8;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::MenuToolButton::VERSION, $want_version, 'VERSION variable');
 is (Gtk2::Ex::History::MenuToolButton->VERSION,  $want_version, 'VERSION class method');
@@ -85,7 +85,11 @@ is (Gtk2::Ex::History::MenuToolButton->VERSION,  $want_version, 'VERSION class m
           'get_menu() is a history after show-menu');
 
   Scalar::Util::weaken ($item);
-  is ($item, undef, 'gc when weakened with history');
+  Scalar::Util::weaken ($menu);
+  is ($item, undef, 'item gc when weakened with history');
+  MyTestHelpers::findrefs($item);
+  is ($menu, undef, 'menu gc when weakened with history');
+  MyTestHelpers::findrefs($menu);
 }
 
 exit 0;

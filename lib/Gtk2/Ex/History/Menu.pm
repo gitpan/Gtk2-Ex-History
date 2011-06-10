@@ -1,4 +1,4 @@
-# Copyright 2007, 2008, 2009, 2010 Kevin Ryde
+# Copyright 2007, 2008, 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -38,7 +38,7 @@ use Gtk2::Ex::Dashes::MenuItem;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 7;
+our $VERSION = 8;
 
 use Glib::Object::Subclass
   'Gtk2::Ex::MenuView',
@@ -47,15 +47,15 @@ use Glib::Object::Subclass
              },
   properties => [ Glib::ParamSpec->object
                   ('history',
-                   'history',
-                   'Blurb.',
+                   __('History object'),
+                   'The history object to present and act on.',
                    'Gtk2::Ex::History',
                    Glib::G_PARAM_READWRITE),
 
                   Glib::ParamSpec->enum
                   ('way',
-                   'way',
-                   'Blurb.',
+                   'Which way',
+                   'Which way of the history to present, either back or forward.',
                    'Gtk2::Ex::History::Way',
                    'back',
                    Glib::G_PARAM_READWRITE),
@@ -258,7 +258,7 @@ L<http://user42.tuxfamily.org/gtk2-ex-history/index.html>
 
 =head1 LICENSE
 
-Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+Gtk2-Ex-History is Copyright 2010, 2011 Kevin Ryde
 
 Gtk2-Ex-History is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free

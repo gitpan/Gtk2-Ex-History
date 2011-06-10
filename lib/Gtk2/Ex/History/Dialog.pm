@@ -1,4 +1,4 @@
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -43,14 +43,14 @@ BEGIN {
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 7;
+our $VERSION = 8;
 
 use Glib::Object::Subclass
   'Gtk2::Dialog',
   properties => [ Glib::ParamSpec->object
                   ('history',
-                   'history',
-                   'Blurb.',
+                   __('History object'),
+                   'The history object to present and act on.',
                    'Gtk2::Ex::History',
                    Glib::G_PARAM_READWRITE),
                 ];
@@ -337,7 +337,7 @@ L<http://user42.tuxfamily.org/gtk2-ex-history/index.html>
 
 =head1 LICENSE
 
-Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+Gtk2-Ex-History is Copyright 2010, 2011 Kevin Ryde
 
 Gtk2-Ex-History is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free

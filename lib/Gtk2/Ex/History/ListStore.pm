@@ -1,4 +1,4 @@
-# Copyright 2007, 2008, 2009, 2010 Kevin Ryde
+# Copyright 2007, 2008, 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -31,7 +31,7 @@ use Gtk2;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-our $VERSION = 7;
+our $VERSION = 8;
 
 use Glib::Object::Subclass
   'Gtk2::ListStore',
@@ -153,7 +153,7 @@ L<http://user42.tuxfamily.org/gtk2-ex-history/index.html>
 
 =head1 LICENSE
 
-Gtk2-Ex-History is Copyright 2010 Kevin Ryde
+Gtk2-Ex-History is Copyright 2010, 2011 Kevin Ryde
 
 Gtk2-Ex-History is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the Free

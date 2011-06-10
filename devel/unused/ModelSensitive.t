@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 
 # This file is part of Gtk2-Ex-History.
 #
@@ -31,7 +31,7 @@ use Gtk2::Ex::History::ModelSensitive;
 plan tests => 20;
 
 #-----------------------------------------------------------------------------
-my $want_version = 7;
+my $want_version = 8;
 my $check_version = $want_version + 1000;
 is ($Gtk2::Ex::History::ModelSensitive::VERSION, $want_version,
     'VERSION variable');

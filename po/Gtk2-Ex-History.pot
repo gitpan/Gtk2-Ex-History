@@ -1,4 +1,4 @@
-# Copyright 2010 Kevin Ryde
+# Copyright 2010, 2011 Kevin Ryde
 #
 # This file is part of Gtk2-Ex-History.
 #
@@ -29,6 +29,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: lib/Gtk2/Ex/History/Action.pm:46 lib/Gtk2/Ex/History/Dialog.pm:52
+#: lib/Gtk2/Ex/History/Menu.pm:50
+msgid "History object"
+msgstr ""
 
 #: lib/Gtk2/Ex/History/Action.pm:144
 msgid "Go back."
